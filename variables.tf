@@ -1,7 +1,3 @@
-variable "ibmcloud_api_key" {
-  type        = string
-  description = "The api key for IBM Cloud access"
-}
 
 variable "resource_group_name" {
   type        = string
@@ -24,7 +20,6 @@ variable "name" {
   description = "The name that should be used for the service, particularly when connecting to an existing service. If not provided then the name will be defaulted to {name prefix}-{service}"
   default     = ""
 }
-
 
 variable "connections" {
   type        = list(string)

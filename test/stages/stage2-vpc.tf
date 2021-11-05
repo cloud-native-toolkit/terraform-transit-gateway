@@ -1,7 +1,3 @@
-provider "ibm" {
-  region           = var.region
-  ibmcloud_api_key = var.ibmcloud_api_key
-}
 
 resource ibm_is_vpc vpc1 {
   name                        = "vpc1"
