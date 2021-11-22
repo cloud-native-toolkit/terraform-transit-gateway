@@ -26,5 +26,10 @@ variable "connections" {
   description = "The list of vpc instance resource_crn to add network connections for."
 }
 
+variable "provision" {
+  type        = bool
+  description = "Flag indicating that the transit gateway must be provisioned"
+  default     = true
+}
 
 
