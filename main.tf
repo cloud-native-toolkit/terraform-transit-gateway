@@ -21,12 +21,19 @@ resource "ibm_tg_gateway" "tg_gw_instance"{
   location       = var.region
   global         = true
   resource_group = data.ibm_resource_group.resource_group.id
+  count = var.provision ? 1 : 0
+}
+
+data "ibm_tg_gateway" "instance" {
+  depends_on = [ibm_tg_gateway.tg_gw_instance]
+  
+  name = local.name
 }
 
 resource "ibm_tg_connection" "ibm_tg_connection_isntance"{
   count = length(var.connections)
 
-  gateway = ibm_tg_gateway.tg_gw_instance.id
+  gateway = data.ibm_tg_gateway.instance.id
   network_type = "vpc"
   name= "connection_instance${count.index}"
   network_id = var.connections[count.index]
