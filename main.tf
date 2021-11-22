@@ -23,12 +23,18 @@ resource "ibm_tg_gateway" "tg_gw_instance"{
   resource_group = data.ibm_resource_group.resource_group.id
 }
 
+resource "random_string" "random" {
+  length           = 4
+  special          = false
+}
+
 resource "ibm_tg_connection" "ibm_tg_connection_isntance"{
   count = length(var.connections)
 
-  gateway = ibm_tg_gateway.tg_gw_instance.id
+  gateway = data.ibm_tg_gateway.instance.id
   network_type = "vpc"
-  name= "connection_instance${count.index}"
+  name= "connection_instance${count.index}-${random_string.random.result}"
   network_id = var.connections[count.index]
 }
+
 
